@@ -23,8 +23,8 @@ public class _11_ReverseMatrixDiagonals {
 
         while (row>=0){
 
-            int r = rows-1;
-            int c = col-1;
+            int r = row;
+            int c = col;
 
             while (c<cols && r >=0) {
                 System.out.print(matrix[r--][c++] + " ");
