@@ -13,11 +13,13 @@ public class _3_VoinaNumberGame {
         Set<Integer> secondDeck = Arrays.stream(scanner.nextLine().split(" "))
                 .map(Integer::parseInt).collect(Collectors.toCollection(LinkedHashSet::new));
 
-        int count = 0;
-        while (!firstDeck.isEmpty() && !secondDeck.isEmpty()) {
-            count++;
 
-            if (count==50) {
+        for (int i = 0; i < 50; i++)
+
+         {
+
+
+            if (firstDeck.isEmpty() || secondDeck.isEmpty()) {
                 break;
             }
             int firstNumber = firstDeck.iterator().next();
