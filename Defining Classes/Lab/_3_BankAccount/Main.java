@@ -10,49 +10,62 @@ public class Main {
 
         Map<Integer, BankAccount> map = new HashMap<>();
 
-        String line = scanner.nextLine();
+        String input = scanner.nextLine();
 
-        while (!line.equals("End")) {
+        while (!input.equals("End")) {
 
-            String[] tokens = line.split("\\s+");
+            String []arr = input.split(" ");
+            BankAccount bankAccount = new BankAccount();
 
-            String command = tokens[0];
+            if (arr[0].equals("Create")) {
 
-            String output = null;
-            if (command.equals("Create")) {
-                BankAccount bankAccount = new BankAccount();
-                int key = bankAccount.getId();
-                map.put(key, bankAccount);
-                output = "Account ID" + key + " created";
-            } else if (command.equals("Deposit")) {
-                int id = Integer.parseInt(tokens[1]);
-                int amount = Integer.parseInt(tokens[2]);
-                BankAccount bankAccount = map.get(id);
-                if (bankAccount != null) {
-                    bankAccount.deposit(amount);
-                    output = "Deposited " + amount + " to ID" + id;
-                } else {
-                    output = "Account does not exist";
-                }
-            } else if (command.equals("SetInterest")) {
-                double interest = Double.parseDouble(tokens[1]);
-                BankAccount.setInterestRate(interest);
-            } else {
-                int id = Integer.parseInt(tokens[1]);
-                int years = Integer.parseInt(tokens[2]);
-                BankAccount bankAccount = map.get(id);
-                if (bankAccount != null) {
-                    output = String.format("%.2f", bankAccount.getInterest(years));
-                } else {
-                    output = "Account does not exist";
-                }
+                int id = bankAccount.getId();
+                map.put(id, bankAccount);
+                System.out.println("Account ID" + id +" created");
             }
 
-            if (output != null) {
-                System.out.println(output);
+            else if (arr[0].equals("Deposit")) {
+                int id = Integer.parseInt(arr[1]);
+                int amount = Integer.parseInt(arr[2]);
+                if (!map.containsKey(id)) {
+                    System.out.println("Account does not exist");
+                }
+                else {
+
+                    BankAccount getID = map.get(id);
+                    getID.deposit(amount);
+                    System.out.printf("Deposited %d to ID%d%n", amount, id);
+                }
+
             }
 
-            line = scanner.nextLine();
+            else if (arr[0].equals("SetInterest")) {
+                double amount = Double.parseDouble(arr[1]);
+                BankAccount.setInterestRate(amount);
+
+            }
+            else if (arr[0].equals("GetInterest")) {
+                int id = Integer.parseInt(arr[1]);
+                int years = Integer.parseInt(arr[2]);
+                if (!map.containsKey(id)) {
+                    System.out.println("Account does not exist");
+                }
+                else {
+                    double getId = map.get(id).getInterestRate(years);
+                    System.out.printf("%.2f%n", getId);
+                }
+
+
+            }
+
+
+
+
+
+            input = scanner.nextLine();
+        }
+
+
         }
     }
-}
+
