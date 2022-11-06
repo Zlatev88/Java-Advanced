@@ -1,0 +1,34 @@
+package Generics.Exercise._6_GenericCountMethodDoubles;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Box <Т extends Comparable>{
+    private List<Т> values;
+
+    public Box() {
+        this.values = new ArrayList<>();
+    }
+
+    public void add(Т value) {
+        values.add(value);
+    }
+
+    public <T> long getCount (T element) {
+
+        return values.stream().filter(e->e.compareTo(element)>0).count();
+
+
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Т value : values) {
+            sb.append(String.format("%s: %s%n", value.getClass().getName(), value));
+        }
+
+        return sb.toString();
+    }
+}
+
