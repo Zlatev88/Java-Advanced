@@ -1,0 +1,110 @@
+import java.util.*;
+
+public class ClimbThePeaks {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] portionsArr = Arrays.stream(scanner.nextLine().split(", ")).mapToInt(Integer::parseInt).toArray();
+
+        int[] staminaArr = Arrays.stream(scanner.nextLine().split(", ")).mapToInt(Integer::parseInt).toArray();
+
+        ArrayDeque<Integer> portions = new ArrayDeque<>();
+        ArrayDeque<Integer> stamina = new ArrayDeque<>();
+
+
+        for (int i = 0; i < portionsArr.length; i++) {
+            portions.push(portionsArr[i]);
+        }
+
+        for (int i = 0; i < staminaArr.length; i++) {
+            stamina.offer(staminaArr[i]);
+        }
+        List<String> conqueredPeaks = new ArrayList<>();
+
+        while (!portions.isEmpty() && !stamina.isEmpty()) {
+            int sum = portions.peek() + stamina.peek();
+
+            if (sum >= 80) {
+                conqueredPeaks.add("Vihren");
+                portions.pop();
+                stamina.poll();
+                sum = portions.peek() + stamina.peek();
+
+            }else {
+                portions.pop();
+                stamina.poll();
+                continue;
+            }
+            if (sum >= 90) {
+                conqueredPeaks.add("Kutelo");
+                portions.pop();
+                stamina.poll();
+                sum = portions.peek() + stamina.peek();
+
+            }
+
+            else {
+                portions.pop();
+                stamina.poll();
+                continue;
+            }
+
+            if (sum >= 100) {
+                conqueredPeaks.add("Banski Suhodol");
+                portions.pop();
+                stamina.poll();
+                sum = portions.peek() + stamina.peek();
+
+            }
+
+            else {
+                portions.pop();
+                stamina.poll();
+                continue;
+            }
+            if (sum >= 60) {
+                conqueredPeaks.add("Polezhan");
+                portions.pop();
+                stamina.poll();
+                sum = portions.peek() + stamina.peek();
+
+            }
+            else {
+                portions.pop();
+                stamina.poll();
+                continue;
+            }
+            if (sum >= 70) {
+                conqueredPeaks.add("Kamenitza");
+                portions.pop();
+                stamina.poll();
+                sum = portions.peek() + stamina.peek();
+
+            }
+            else {
+                portions.pop();
+                stamina.poll();
+            }
+
+        }
+        if (conqueredPeaks.size() == 5) {
+            System.out.println("Alex did it! He climbed all top five Pirin peaks in one week -> @FIVEinAWEEK");
+
+        } else {
+            System.out.println("Alex failed! He has to organize his journey better next time -> @PIRINWINS");
+        }
+        if (!conqueredPeaks.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("Conquered peaks:%n"));
+            for (String e : conqueredPeaks) {
+
+                sb.append(String.format("%s%n", e));
+
+            }
+
+            System.out.println(sb);
+        }
+    }
+
+
+}
